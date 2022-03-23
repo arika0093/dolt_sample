@@ -2,6 +2,7 @@ version: '3.3'
 
 services:
   db_dolt:
+    restart: always
     build:
       context: .
       dockerfile: ./services/db_dolt/dockerfile

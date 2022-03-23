@@ -9,9 +9,9 @@ RUN apt update \
  && dolt config --global --add user.email "DOLT_DEVELOP_SERVER@example.com" \
  && dolt config --global --add user.name "DOLT_DEVELOP_SERVER"
 
-# initialize repository
-COPY ./services/db_dolt/initialize.sh ./initialize.sh
-RUN sh ./initialize.sh
+# initialize tables
+COPY ./services/db_dolt/initialize.sql ./initialize.sql
+RUN dolt sql < ./initialize.sql
 
 # execute dolt commands
 COPY ./services/db_dolt/config.yaml ./config.yaml
