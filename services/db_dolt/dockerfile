@@ -14,4 +14,4 @@ RUN sh ./initialize.sh
 # execute dolt commands
 COPY ./services/db_dolt/config.yaml ./config.yaml
 ENTRYPOINT [ "dolt" ]
-CMD [ "sql-server", "--config", "./dolt.yaml" ]
+CMD [ "sql-server", "--config", "./config.yaml" ]
