@@ -5,7 +5,9 @@ WORKDIR /db_dolt
 # install dolt
 RUN apt update \
  && apt install -y curl \
- && curl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | bash
+ && curl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | bash \
+ && dolt config --global --add user.email "DOLT_DEVELOP_SERVER@example.com" \
+ && dolt config --global --add user.name "DOLT_DEVELOP_SERVER"
 
 # initialize repository
 COPY ./services/db_dolt/initialize.sh ./initialize.sh
