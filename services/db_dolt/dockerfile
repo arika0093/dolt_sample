@@ -1,0 +1,17 @@
+# using ubuntu 20
+FROM ubuntu:focal
+WORKDIR /db_dolt
+
+# install dolt
+RUN apt update \
+ && apt install -y curl \
+ && curl -L https://github.com/dolthub/dolt/releases/latest/download/install.sh | bash
+
+# initialize repository
+COPY ./services/db_dolt/initialize.sh ./initialize.sh
+RUN sh ./initialize.sh
+
+# execute dolt commands
+COPY ./services/db_dolt/config.yaml ./config.yaml
+ENTRYPOINT [ "dolt" ]
+CMD [ "sql-server", "--config", "./dolt.yaml" ]
